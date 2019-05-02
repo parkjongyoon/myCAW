@@ -20,7 +20,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		String password = (String) authentication.getCredentials();
 		
 		UserDTO user = (UserDTO) userService.loadUserByUsername(username);
-		
+		if(password.equals(user.getUserPwd())){
+			throw new BadCredentialsException(username);
+		}
 		return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());
 	}
 
