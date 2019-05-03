@@ -14,6 +14,7 @@ public class UserDTO implements UserDetails {
 	private String user_id;
 	private String user_pwd;
 	private String user_name;
+	private String user_authority;
 	private Collection<? extends GrantedAuthority> authorities;
 	
 	@Override

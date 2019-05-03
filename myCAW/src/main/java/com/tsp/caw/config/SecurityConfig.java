@@ -36,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		    .csrf().disable()
 		    .authorizeRequests()
 		    .antMatchers("/login", "/register").permitAll() //인증 없이 허용되는 경로
+		    .antMatchers("/admin/**").hasRole("ADMIN")
 		 	.antMatchers("/**").authenticated() //인증 받아야 접근할 수 있는 경로
 		 	  
 		 	.and()

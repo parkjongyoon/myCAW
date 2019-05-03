@@ -23,5 +23,7 @@
 			</fieldset>
 			<input type="submit">
 	</form>
+	
+	<div><input type="button" value="회원가입" onClick="location.href='/register'"></div>
 </body>
 </html>
