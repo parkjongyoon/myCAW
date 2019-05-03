@@ -29,18 +29,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		
-		
-		LOG.error("ccccccccccccccccccccccccccccc");
-		
 		String username = (String) authentication.getPrincipal();
 		String password = (String)authentication.getCredentials();
 		
 		UserDTO user = (UserDTO) userService.loadUserByUsername(username);
-		
-		LOG.error("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		LOG.debug("password = " + password);
-		LOG.debug("user.getUser_pwd() = " + user.getUser_pwd());
-		LOG.debug("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		
 		if(user == null) {
 			throw new UsernameNotFoundException(username);
@@ -49,8 +41,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		if(!passwordEncoder.matches(password, user.getUser_pwd())){
 			throw new BadCredentialsException(username);
 		}
+		
 		return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());
-//		return null;
 	}
 
 	@Override
