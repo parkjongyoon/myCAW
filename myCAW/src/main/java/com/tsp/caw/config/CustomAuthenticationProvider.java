@@ -29,14 +29,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		
 		LOG.error("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		LOG.debug("password = " + password);
-		LOG.debug("user.getUserPwd() = " + user.getUserPwd());
+		LOG.debug("user.getUser_pwd() = " + user.getUser_pwd());
 		LOG.debug("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		
 		if(user == null) {
 			throw new UsernameNotFoundException(username);
 		}
 		
-		if(password.equals(user.getUserPwd())){
+		if(password.equals(user.getUser_pwd())){
 			throw new BadCredentialsException(username);
 		}
 		return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());

@@ -38,7 +38,7 @@ public class UserService implements UserDetailsService {
 	}
 	
 	public void createUser(UserDTO userDTO) {
-		userDTO.setUserPwd(new BCryptPasswordEncoder().encode(userDTO.getUserPwd()));
+		userDTO.setUser_pwd(new BCryptPasswordEncoder().encode(userDTO.getUser_pwd()));
 		userMapper.createUser(userDTO);
 	}
 }

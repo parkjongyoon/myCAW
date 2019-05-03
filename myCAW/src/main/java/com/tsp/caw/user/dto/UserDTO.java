@@ -1,10 +1,8 @@
 package com.tsp.caw.user.dto;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Data;
@@ -12,20 +10,20 @@ import lombok.Data;
 @Data
 public class UserDTO implements UserDetails {
 	
-	private int userSeq;
-	private String userId;
-	private String userPwd;
-	private String userName;
+	private int user_seq;
+	private String user_id;
+	private String user_pwd;
+	private String user_name;
 	private Collection<? extends GrantedAuthority> authorities;
 	
 	@Override
 	public String getPassword() {
-		return userPwd;
+		return user_pwd;
 	}
 	
 	@Override
 	public String getUsername() {
-		return userPwd;
+		return user_pwd;
 	}
 	
 	@Override
