@@ -9,10 +9,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import com.tsp.caw.user.dto.UserDTO;
 import com.tsp.caw.user.service.UserService;
 
+@Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 	
 	private static final Log LOG = LogFactory.getLog( CustomAuthenticationProvider.class );
@@ -20,10 +23,17 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+		
+		
+		LOG.error("ccccccccccccccccccccccccccccc");
+		
 		String username = (String) authentication.getPrincipal();
-		String password = (String) authentication.getCredentials();
+		String password = (String)authentication.getCredentials();
 		
 		UserDTO user = (UserDTO) userService.loadUserByUsername(username);
 		
@@ -36,10 +46,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			throw new UsernameNotFoundException(username);
 		}
 		
-		if(password.equals(user.getUser_pwd())){
+		if(!passwordEncoder.matches(password, user.getUser_pwd())){
 			throw new BadCredentialsException(username);
 		}
 		return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());
+//		return null;
 	}
 
 	@Override

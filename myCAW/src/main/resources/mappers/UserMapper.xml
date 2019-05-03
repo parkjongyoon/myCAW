@@ -15,6 +15,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     INSERT INTO admin_user
     		(user_id, user_pwd, user_name)
     		VALUES
-    		(#{userId}, #{userPwd}, #{userName})
+    		(#{user_id}, #{user_pwd}, #{user_name})
     </insert>
 </mapper>

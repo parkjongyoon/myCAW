@@ -1,6 +1,7 @@
 package com.tsp.caw.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -21,6 +22,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserService userService;
 	
 	@Autowired
+	private CustomAuthenticationProvider customAuthenticationProvider;
+	
+	@Autowired
 	private LoginSuccessHandler loginSuccessHandler;
 	
 	@Autowired
@@ -36,7 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 	  
 		 	.and()
 		    .formLogin()
-//		    .loginPage("/login") //login 페이지
+		    .loginPage("/login") //login 페이지
+		    .loginProcessingUrl("/authenticate")
 		    .usernameParameter("username") //로그인 아이디 param명
 		    .passwordParameter("password") //로그인 비밀번호 param명
 		    .successHandler(loginSuccessHandler) //login 성공후 처리
@@ -51,18 +56,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    	
+    	auth.authenticationProvider(customAuthenticationProvider);
+    	
     	//비밀번호 암호화 없이 로그인할때
-		auth.userDetailsService(userService).passwordEncoder(this.noOpPasswordEncoder());
+//		auth.userDetailsService(userService).passwordEncoder(this.noOpPasswordEncoder());
 		
 		//비밀번호 암호화 해서 로그인할때
 //		auth.userDetailsService(userService).passwordEncoder(this.passwordEncoder());
     }	
-    
-    public PasswordEncoder noOpPasswordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
-    }
-	
-    public PasswordEncoder passwordEncoder() {
-    	return new BCryptPasswordEncoder();
-    }
 }

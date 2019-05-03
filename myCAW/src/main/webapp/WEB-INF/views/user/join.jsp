@@ -12,16 +12,16 @@
 			<legend>회원가입</legend>
 			<ul>
 				<li>
-					<label for="userId">아이디</label>
-					<input type="text" name="userId" id="userId">
+					<label for="user_id">아이디</label>
+					<input type="text" name="user_id" id="user_id">
 				</li>
 				<li>
-					<label for="userPwd">비밀번호</label>
-					<input type="text" name="userPwd" id="userPwd">
+					<label for="user_pwd">비밀번호</label>
+					<input type="text" name="user_pwd" id="user_pwd">
 				</li>
 				<li>
-					<label for="userName">회원명</label>
-					<input type="text" name="userName" id="userName">
+					<label for="user_name">회원명</label>
+					<input type="text" name="user_name" id="user_name">
 				</li>
 			</ul>
 			</fieldset>

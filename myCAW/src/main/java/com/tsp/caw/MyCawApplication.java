@@ -8,6 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class MyCawApplication {
@@ -27,4 +29,9 @@ public class MyCawApplication {
         return sessionFactory.getObject();
         
     }
+    
+	@Bean
+    public PasswordEncoder passwordEncoder() {
+    	return new BCryptPasswordEncoder();
+    }	    
 }

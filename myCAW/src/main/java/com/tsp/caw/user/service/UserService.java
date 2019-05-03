@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.tsp.caw.user.dao.UserMapper;
@@ -23,8 +24,14 @@ public class UserService implements UserDetailsService {
 	@Autowired
 	private UserMapper userMapper;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
+		LOG.debug("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+		
 		UserDTO userDTO = userMapper.readUser(username);
 		if(userDTO == null) {
 			throw new UsernameNotFoundException(username);
@@ -38,7 +45,8 @@ public class UserService implements UserDetailsService {
 	}
 	
 	public void createUser(UserDTO userDTO) {
-		userDTO.setUser_pwd(new BCryptPasswordEncoder().encode(userDTO.getUser_pwd()));
+		userDTO.setUser_pwd(passwordEncoder.encode(userDTO.getUser_pwd()));
 		userMapper.createUser(userDTO);
 	}
+
 }
