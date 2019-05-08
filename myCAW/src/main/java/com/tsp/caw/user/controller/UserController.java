@@ -1,5 +1,7 @@
 package com.tsp.caw.user.controller;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tsp.caw.user.dto.UserDTO;
 import com.tsp.caw.user.service.UserService;
@@ -35,8 +38,14 @@ public class UserController {
 		return "user/login";
 	}
 	
-	@GetMapping("/users")
-	public String readUsers(Model model) {
+	@GetMapping("/admin/users")
+	@ResponseBody
+	public List<UserDTO> readUsers(Model model) {
+		return userService.readUser();
+	}
+	
+	@GetMapping("/admin/user-list")
+	public String userList(Model model) {
 		return "user/list";
 	}
 }

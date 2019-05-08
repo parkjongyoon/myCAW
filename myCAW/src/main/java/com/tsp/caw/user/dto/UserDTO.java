@@ -23,39 +23,31 @@ import lombok.Data;
 public class UserDTO implements UserDetails {
 	
 	private int userSeq;
-	private String userId;
-	private String userPwd;
-	private String userName;
+	private String id;
+	private String password;
+	private String name;
 	private String role;
 	private Collection<? extends GrantedAuthority> authorities;
 	
 	@Override
-	public String getPassword() {
-		return userPwd;
-	}
-	
-	@Override
 	public String getUsername() {
-		return userPwd;
+		return id;
 	}
-	
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
-	
 	@Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
-	
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
-	
 	@Override
 	public boolean isEnabled() {
 		return true;
 	}
+
 }

@@ -77,7 +77,7 @@ public class UserService implements UserDetailsService {
 	public void createUser(UserDTO userDTO) {
 		
 		//회원 등록
-		userDTO.setUserPwd(passwordEncoder.encode(userDTO.getUserPwd()));
+		userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 		userMapper.createUser(userDTO);
 		int userSeq = userDTO.getUserSeq();
 		LOG.debug("userSeq = " + userSeq);
@@ -87,6 +87,16 @@ public class UserService implements UserDetailsService {
 		userRole.setUserSeq(userSeq);
 		userRole.setRole(userDTO.getRole());
 		userMapper.createRole(userRole);
+	}
+	
+	/**
+	 * 회원리스트 가져오기
+	 *  
+	 * @author jongyoon.park
+	 * @since 2019. 5. 8.
+	 */
+	public List<UserDTO> readUser(){
+		return userMapper.readUser();
 	}
 
 }

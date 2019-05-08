@@ -38,7 +38,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			throw new UsernameNotFoundException(username);
 		}
 		
-		if(!passwordEncoder.matches(password, user.getUserPwd())){
+		if(!passwordEncoder.matches(password, user.getPassword())){
 			throw new BadCredentialsException(username);
 		}
 		

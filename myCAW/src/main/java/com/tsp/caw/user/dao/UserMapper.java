@@ -23,12 +23,20 @@ import com.tsp.caw.user.dto.UserRoleDTO;
 public interface UserMapper {
 	
 	/**
+	 * 회원리스트 가져오기
+	 *  
+	 * @author jongyoon.park
+	 * @since 2019. 5. 8.
+	 */
+	public List<UserDTO> readUser();
+	
+	/**
 	 * userId를 가지고 회원정보를 가져온다
 	 *  
 	 * @author jongyoon.park
 	 * @since 2019. 5. 7.
 	 */
-	public UserDTO readUserById(String userId);
+	public UserDTO readUserById(String id);
 	
 	/**
 	 * 회원 등록

@@ -13,15 +13,15 @@
 			<ul>
 				<li>
 					<label for="user_id">아이디</label>
-					<input type="text" name="userId" id="user_id">
+					<input type="text" name="id" id="user_id">
 				</li>
 				<li>
 					<label for="user_pwd">비밀번호</label>
-					<input type="text" name="userPwd" id="user_pwd">
+					<input type="text" name="password" id="user_pwd">
 				</li>
 				<li>
 					<label for="user_name">회원명</label>
-					<input type="text" name="userName" id="user_name">
+					<input type="text" name="name" id="user_name">
 				</li>
 				<li>
 					<label for="user_authority">권한</label>
