@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.tsp.caw.config.CustomAuthenticationProvider;
 import com.tsp.caw.user.dto.UserDTO;
 import com.tsp.caw.user.service.UserService;
 

@@ -1,6 +1,7 @@
 package com.tsp.caw.user.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,9 +13,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tsp.caw.user.dao.UserMapper;
 import com.tsp.caw.user.dto.UserDTO;
+import com.tsp.caw.user.dto.UserRoleDTO;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -29,21 +32,43 @@ public class UserService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		UserDTO userDTO = userMapper.readUser(username);
+		UserDTO userDTO = userMapper.readUserById(username);
 		if(userDTO == null) {
 			throw new UsernameNotFoundException(username);
+		}else {
+		
+			List<UserRoleDTO> roles = userMapper.readRole(userDTO.getUserSeq());
+			ArrayList<GrantedAuthority> authorities = new ArrayList();
+			
+			for(UserRoleDTO role : roles) {
+				authorities.add(new SimpleGrantedAuthority(role.getRole()));
+			}
+			
+			userDTO.setAuthorities(authorities);
 		}
-		
-		ArrayList<GrantedAuthority> authorities = new ArrayList();
-		authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-		
-		userDTO.setAuthorities(authorities);
 		return userDTO;
 	}
 	
+	/**
+	 * 회원 가입하기
+	 *  
+	 * @author jongyoon.park
+	 * @since 2019. 5. 8.
+	 */
+	@Transactional
 	public void createUser(UserDTO userDTO) {
-		userDTO.setUser_pwd(passwordEncoder.encode(userDTO.getUser_pwd()));
+		
+		//회원 등록
+		userDTO.setUserPwd(passwordEncoder.encode(userDTO.getUserPwd()));
 		userMapper.createUser(userDTO);
+		int userSeq = userDTO.getUserSeq();
+		LOG.debug("userSeq = " + userSeq);
+		
+		//권한 등록
+		UserRoleDTO userRole = new UserRoleDTO();
+		userRole.setUserSeq(userSeq);
+		userRole.setRole(userDTO.getRole());
+		userMapper.createRole(userRole);
 	}
 
 }

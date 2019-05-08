@@ -5,16 +5,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
 <mapper namespace="com.tsp.caw.user.dao.UserMapper">
  
-    <select id="readUser" resultType="com.tsp.caw.user.dto.UserDTO" parameterType="String">
+    <select id="readUserById" resultType="com.tsp.caw.user.dto.UserDTO" parameterType="String">
         select * 
           from admin_user
          where user_id = #{userId}
     </select>
     
-    <insert id="createUser" parameterType="com.tsp.caw.user.dto.UserDTO">
+    <insert id="createUser" parameterType="com.tsp.caw.user.dto.UserDTO" useGeneratedKeys="true" keyProperty="userSeq">
     INSERT INTO admin_user
     		(user_id, user_pwd, user_name)
     		VALUES
-    		(#{user_id}, #{user_pwd}, #{user_name})
+    		(#{userId}, #{userPwd}, #{userName})
     </insert>
+    
+    <select id="readRole" resultType="com.tsp.caw.user.dto.UserRoleDTO" parameterType="int">
+        select * 
+          from user_role
+         where user_seq = #{userSeq}
+    </select> 
+    
+    <insert id="createRole" parameterType="com.tsp.caw.user.dto.UserRoleDTO">
+    INSERT INTO user_role
+    		(user_seq, role)
+    		VALUES
+    		(#{userSeq}, #{role})
+    </insert>       
 </mapper>
