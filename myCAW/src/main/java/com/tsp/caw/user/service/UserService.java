@@ -19,6 +19,18 @@ import com.tsp.caw.user.dao.UserMapper;
 import com.tsp.caw.user.dto.UserDTO;
 import com.tsp.caw.user.dto.UserRoleDTO;
 
+ /**
+ * 회원 service
+ * 
+ * @author jongyoon.park
+ * @since 2019. 5. 8.
+ * 
+ *        <pre>
+ *     since                 author                     description
+ *  ===========    =============    ===========================
+ * 2019. 5. 8.             jongyoon.park       	             최초 생성
+ *        </pre>
+ */
 @Service
 public class UserService implements UserDetailsService {
 	private static final Log LOG = LogFactory.getLog( UserService.class );
@@ -29,6 +41,12 @@ public class UserService implements UserDetailsService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	/**
+	 * 회원정보 및 권한정보 UserDetails에 세팅하기
+	 *  
+	 * @author jongyoon.park
+	 * @since 2019. 5. 8.
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		

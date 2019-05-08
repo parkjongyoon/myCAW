@@ -26,7 +26,7 @@
 				<li>
 					<label for="user_authority">±ÇÇÑ</label>
 					<select name="role" id="user_authority">
-					<option value="ROLE_ADMIN">ROLE_MASTER</option>
+					<option value="ROLE_MASTER">ROLE_MASTER</option>
 					<option value="ROLE_USER">ROLE_USER</option>
 					</select>
 				</li>

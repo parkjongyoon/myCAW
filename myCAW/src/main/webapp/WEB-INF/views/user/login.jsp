@@ -13,7 +13,7 @@
 			<ul>
 				<li>
 					<label for="username">아이디</label>
-					<input type="text" name="username" id="username" value="ndarkness">
+					<input type="text" name="username" id="username" value="aa">
 				</li>
 				<li>
 					<label for="password">비밀번호</label>
