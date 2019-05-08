@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>TSP 메인</title>
+<title>TSP call</title>
 </head>
 <body>
-TSP 메인페이지
+TSP call 메인페이지
 </body>
 </html>

@@ -13,7 +13,7 @@
 $(document).ready( function () {
     $('#table_id').DataTable({
     	ajax:{
-    		url:'/admin/users',
+    		url:'/admin/user/users-json',
     		dataSrc:''
     	},
     	columns:[

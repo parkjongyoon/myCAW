@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
 	@GetMapping("/")
-	public String main() {
-		return "hello world";
+	public String main(Model model) {
+		return "main";
 	}
 	
 	@GetMapping("/call")

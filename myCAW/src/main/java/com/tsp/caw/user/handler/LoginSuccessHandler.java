@@ -1,4 +1,4 @@
-package com.tsp.caw.user.login;
+package com.tsp.caw.user.handler;
 
 import java.io.IOException;
 
@@ -17,7 +17,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		response.setStatus(HttpServletResponse.SC_OK);
-		response.sendRedirect("/");
+		response.sendRedirect("/admin/user/users");
 	}
 
 }

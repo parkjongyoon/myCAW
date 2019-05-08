@@ -2,9 +2,15 @@ package com.tsp.caw.user.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +36,7 @@ public class UserController {
 	@PostMapping("/register")
 	public String createtUser(Model model, UserDTO userDTO) {
 		userService.createUser(userDTO);
-		return "redirect:/users";
+		return "redirect:/admin/user/users";
 	}
 	
 	@GetMapping("/login")
@@ -38,13 +44,22 @@ public class UserController {
 		return "user/login";
 	}
 	
-	@GetMapping("/admin/users")
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(auth != null) {
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
+		return "redirect:/login";
+	}
+	
+	@GetMapping("/admin/user/users-json")
 	@ResponseBody
 	public List<UserDTO> readUsers(Model model) {
 		return userService.readUser();
 	}
 	
-	@GetMapping("/admin/user-list")
+	@GetMapping("/admin/user/users")
 	public String userList(Model model) {
 		return "user/list";
 	}
