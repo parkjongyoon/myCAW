@@ -13,11 +13,11 @@
 			<ul>
 				<li>
 					<label for="username">아이디</label>
-					<input type="text" name="username" id="username" value="aa">
+					<input type="text" name="username" id="username" value="aa" required>
 				</li>
 				<li>
 					<label for="password">비밀번호</label>
-					<input type="text" name="password" id="password" value="1234">
+					<input type="text" name="password" id="password" value="1234" required>
 				</li>
 			</ul>
 			</fieldset>
