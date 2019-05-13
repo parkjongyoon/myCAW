@@ -74,7 +74,7 @@ public class UserService implements UserDetailsService {
 	 * @since 2019. 5. 8.
 	 */
 	@Transactional
-	public void createUser(UserVo userVo) {
+	public void insertUser(UserVo userVo) {
 		
 		//회원 등록
 		userVo.setPassword(passwordEncoder.encode(userVo.getPassword()));
@@ -95,8 +95,38 @@ public class UserService implements UserDetailsService {
 	 * @author jongyoon.park
 	 * @since 2019. 5. 8.
 	 */
-	public List<UserVo> readUser(){
-		return userDao.selectUser();
+	public List<UserVo> selectUserByCondition(UserVo userVo){
+		return userDao.selectUserByCondition(userVo);
 	}
-
+	
+	/**
+	 * 회원 수정하기
+	 *  
+	 * @author jongyoon.park
+	 * @return 
+	 * @since 2019. 5. 13.
+	 */
+	public void updateUser(UserVo userVo) {
+		userDao.updateUser(userVo);
+	}
+	
+	/**
+	 * 회원 삭제하기
+	 *  
+	 * @author jongyoon.park
+	 * @since 2019. 5. 13.
+	 */
+	public void deleteUser(int userSeq) {
+		userDao.deleteUser(userSeq);
+	}
+	
+	/**
+	 * userSeq를 가지고 회원정보를 가져온다
+	 *  
+	 * @author jongyoon.park
+	 * @since 2019. 5. 7.
+	 */
+	public UserVo selectUserByUserSeq(int userSeq) {
+		return userDao.selectUserByUserSeq(userSeq);
+	}
 }

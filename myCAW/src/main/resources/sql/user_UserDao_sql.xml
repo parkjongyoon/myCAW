@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
 <mapper namespace="com.tsp.caw.user.dao.UserDao">
  
-    <select id="selectUser" resultType="com.tsp.caw.user.vo.UserVo">
+    <select id="selectUserByCondition" resultType="com.tsp.caw.user.vo.UserVo" parameterType="com.tsp.caw.user.vo.UserVo">
         SELECT user_seq
               ,id
               ,name 
@@ -16,6 +16,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select * 
           from admin_user
          where id = #{id}
+    </select>
+ 
+    <select id="selectUserByUserSeq" resultType="com.tsp.caw.user.vo.UserVo" parameterType="int">
+        select * 
+          from admin_user
+         where user_seq = #{userSeq}
     </select>
     
     <insert id="insertUser" parameterType="com.tsp.caw.user.vo.UserVo" useGeneratedKeys="true" keyProperty="userSeq">
@@ -36,5 +42,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     		(user_seq, role)
     		VALUES
     		(#{userSeq}, #{role})
-    </insert>       
+    </insert>
+    
+    <update id="updateUser" parameterType="com.tsp.caw.user.vo.UserVo">
+    UPDATE admin_user
+       <set>
+       	<if test="password != null">password = #{password},</if>
+       	<if test="name != null">name = #{name}</if>
+       </set>
+     WHERE userSeq = #{userSeq}
+    </update>
+    
+    <delete id="deleteUser" parameterType="int">
+    DELETE admin_user
+     WHERE userSeq = #{userSeq}
+    </delete>       
 </mapper>

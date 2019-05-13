@@ -29,7 +29,7 @@ public interface UserDao {
 	 * @author jongyoon.park
 	 * @since 2019. 5. 8.
 	 */
-	public List<UserVo> selectUser();
+	public List<UserVo> selectUserByCondition(UserVo userVo);
 	
 	/**
 	 * userId를 가지고 회원정보를 가져온다
@@ -38,6 +38,14 @@ public interface UserDao {
 	 * @since 2019. 5. 7.
 	 */
 	public UserVo selectUserById(String id);
+	
+	/**
+	 * userSeq를 가지고 회원정보를 가져온다
+	 *  
+	 * @author jongyoon.park
+	 * @since 2019. 5. 7.
+	 */
+	public UserVo selectUserByUserSeq(int userSeq);
 	
 	/**
 	 * 회원 등록
@@ -62,4 +70,20 @@ public interface UserDao {
 	 * @since 2019. 5. 8.
 	 */
 	public void insertRole(UserRoleVo userRoleVo);
+	
+	/**
+	 * 회원 수정
+	 *  
+	 * @author jongyoon.park
+	 * @since 2019. 5. 13.
+	 */
+	public void updateUser(UserVo userVo);
+	
+	/**
+	 * 회원 삭제
+	 *  
+	 * @author jongyoon.park
+	 * @since 2019. 5. 13.
+	 */
+	public void deleteUser(int userSeq);
 }
