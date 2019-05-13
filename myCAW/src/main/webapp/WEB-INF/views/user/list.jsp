@@ -17,20 +17,53 @@ $(document).ready( function () {
     		dataSrc:''
     	},
     	columns:[
-    		{data:'id'},
+    		{data:'userSeq'},
+    		{data:'id',
+    			render:function(data, type, row){
+    				var userSeq = row.userSeq;
+    				if(type == "display"){
+    					data = "<a href='/admin/user/users/"+userSeq+"'>"+data+"</a>"
+    				}
+    				return data;
+    			}},
     		{data:'name'}
+    	],
+    	columnDefs:[
+    		{targets:[3],
+    			render:function(data, type, row){
+    				var html = "<button type='button' name='deleteBtn' onClick=deleteUser('"+row.userSeq+"')>delete</button>";
+    				return html;
+    			}}
     	]
     });
 } );
+
+//회원 삭제하기
+function deleteUser(userSeq){
+	if(confirm("정말로 삭제하시겠습니까?")){
+		$.ajax({
+			url: '/admin/user/users/' + userSeq,
+			type: 'DELETE',
+			success: function(response){
+				location.href = "/admin/user/users";
+			}
+		});
+	}
+}
+
 </script>
 <body>
 	<table id="table_id" class="display">
 	    <thead>
 	        <tr>
+	            <th>userSeq</th>
 	            <th>id</th>
 	            <th>name</th>
+	            <th>work</th>
 	        </tr>
 	    </thead>
 	</table>
 </body>
+
+<form name="deleteForm" method="DELETE"></form>
 </html>

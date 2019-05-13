@@ -106,6 +106,7 @@ public class UserService implements UserDetailsService {
 	 * @return 
 	 * @since 2019. 5. 13.
 	 */
+	@Transactional
 	public void updateUser(UserVo userVo) {
 		userDao.updateUser(userVo);
 	}
@@ -116,6 +117,7 @@ public class UserService implements UserDetailsService {
 	 * @author jongyoon.park
 	 * @since 2019. 5. 13.
 	 */
+	@Transactional
 	public void deleteUser(int userSeq) {
 		userDao.deleteUser(userSeq);
 	}

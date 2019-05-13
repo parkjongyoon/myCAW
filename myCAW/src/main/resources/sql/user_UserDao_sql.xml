@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
     
     <delete id="deleteUser" parameterType="int">
-    DELETE admin_user
-     WHERE userSeq = #{userSeq}
+    DELETE FROM admin_user
+     WHERE user_seq = #{userSeq}
     </delete>       
 </mapper>
