@@ -12,16 +12,23 @@
 			<legend>회원가입</legend>
 			<ul>
 				<li>
-					<label for="userId">아이디</label>
-					<input type="text" name="userId" id="userId">
+					<label for="user_id">아이디</label>
+					<input type="text" name="id" id="user_id">
 				</li>
 				<li>
-					<label for="userPwd">비밀번호</label>
-					<input type="text" name="userPwd" id="userPwd">
+					<label for="user_pwd">비밀번호</label>
+					<input type="text" name="password" id="user_pwd">
 				</li>
 				<li>
-					<label for="userName">회원명</label>
-					<input type="text" name="userName" id="userName">
+					<label for="user_name">회원명</label>
+					<input type="text" name="name" id="user_name">
+				</li>
+				<li>
+					<label for="user_authority">권한</label>
+					<select name="role" id="user_authority">
+					<option value="ROLE_MASTER">ROLE_MASTER</option>
+					<option value="ROLE_USER">ROLE_USER</option>
+					</select>
 				</li>
 			</ul>
 			</fieldset>

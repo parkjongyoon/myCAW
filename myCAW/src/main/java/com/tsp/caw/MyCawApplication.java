@@ -26,7 +26,7 @@ public class MyCawApplication {
         
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setMapperLocations(
-        		new PathMatchingResourcePatternResolver().getResources("classpath:mappers/*.xml"));
+        		new PathMatchingResourcePatternResolver().getResources("classpath:sql/*.xml"));
         sessionFactory.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
         return sessionFactory.getObject();
         

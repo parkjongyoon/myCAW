@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tsp.caw.user.dto.UserDTO;
 import com.tsp.caw.user.service.UserService;
+import com.tsp.caw.user.vo.UserVo;
 
 @Controller
 public class UserController {
@@ -34,8 +34,8 @@ public class UserController {
 	}
 	
 	@PostMapping("/register")
-	public String createtUser(Model model, UserDTO userDTO) {
-		userService.createUser(userDTO);
+	public String createtUser(Model model, UserVo userVo) {
+		userService.createUser(userVo);
 		return "redirect:/admin/user/users";
 	}
 	
@@ -55,7 +55,7 @@ public class UserController {
 	
 	@GetMapping("/admin/user/users-json")
 	@ResponseBody
-	public List<UserDTO> readUsers(Model model) {
+	public List<UserVo> readUsers(Model model) {
 		return userService.readUser();
 	}
 	

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="com.tsp.caw.user.dao.UserDao">
+ 
+    <select id="readUser" resultType="com.tsp.caw.user.vo.UserVo">
+        SELECT user_seq
+              ,id
+              ,name 
+          FROM admin_user
+    </select>
+ 
+    <select id="readUserById" resultType="com.tsp.caw.user.vo.UserVo" parameterType="String">
+        select * 
+          from admin_user
+         where id = #{id}
+    </select>
+    
+    <insert id="createUser" parameterType="com.tsp.caw.user.vo.UserVo" useGeneratedKeys="true" keyProperty="userSeq">
+    INSERT INTO admin_user
+    		(id, password, name)
+    		VALUES
+    		(#{id}, #{password}, #{name})
+    </insert>
+    
+    <select id="readRole" resultType="com.tsp.caw.user.vo.UserRoleVo" parameterType="int">
+        select * 
+          from user_role
+         where user_seq = #{userSeq}
+    </select> 
+    
+    <insert id="createRole" parameterType="com.tsp.caw.user.vo.UserRoleVo">
+    INSERT INTO user_role
+    		(user_seq, role)
+    		VALUES
+    		(#{userSeq}, #{role})
+    </insert>       
+</mapper>

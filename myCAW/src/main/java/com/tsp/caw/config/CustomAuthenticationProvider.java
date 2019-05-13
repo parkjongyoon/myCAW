@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.tsp.caw.user.dto.UserDTO;
 import com.tsp.caw.user.service.UserService;
+import com.tsp.caw.user.vo.UserVo;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
@@ -32,7 +32,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		String username = (String) authentication.getPrincipal();
 		String password = (String)authentication.getCredentials();
 		
-		UserDTO user = (UserDTO) userService.loadUserByUsername(username);
+		UserVo user = (UserVo) userService.loadUserByUsername(username);
 		
 		if(user == null) {
 			throw new UsernameNotFoundException(username);
