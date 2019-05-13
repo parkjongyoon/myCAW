@@ -50,12 +50,12 @@ public class UserService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		UserVo userVo = userDao.readUserById(username);
+		UserVo userVo = userDao.selectUserById(username);
 		if(userVo == null) {
 			throw new UsernameNotFoundException(username);
 		}else {
 		
-			List<UserRoleVo> roles = userDao.readRole(userVo.getUserSeq());
+			List<UserRoleVo> roles = userDao.selectRoleByUserSeq(userVo.getUserSeq());
 			ArrayList<GrantedAuthority> authorities = new ArrayList();
 			
 			for(UserRoleVo role : roles) {
@@ -78,7 +78,7 @@ public class UserService implements UserDetailsService {
 		
 		//회원 등록
 		userVo.setPassword(passwordEncoder.encode(userVo.getPassword()));
-		userDao.createUser(userVo);
+		userDao.insertUser(userVo);
 		int userSeq = userVo.getUserSeq();
 		LOG.debug("userSeq = " + userSeq);
 		
@@ -86,7 +86,7 @@ public class UserService implements UserDetailsService {
 		UserRoleVo userRole = new UserRoleVo();
 		userRole.setUserSeq(userSeq);
 		userRole.setRole(userVo.getRole());
-		userDao.createRole(userRole);
+		userDao.insertRole(userRole);
 	}
 	
 	/**
@@ -96,7 +96,7 @@ public class UserService implements UserDetailsService {
 	 * @since 2019. 5. 8.
 	 */
 	public List<UserVo> readUser(){
-		return userDao.readUser();
+		return userDao.selectUser();
 	}
 
 }
